@@ -8,7 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-// import id.ac.its.finalprojectpbo.game.Game;
+import com.example.DrawUtils;
+import com.example.Game;
+
+
 
 public class GuiButton {
 	 
@@ -20,7 +23,7 @@ public class GuiButton {
 	private Color released;
 	private Color hover;
 	private Color pressed;
-//	private Font font = Game.main.deriveFont(22f);	
+	private Font font = Game.main.deriveFont(22f);	
 	
 	public GuiButton(int x, int y, int width, int height) {
 		clickBox = new Rectangle(x, y, width, height);
@@ -49,9 +52,9 @@ public class GuiButton {
 		}
 		
 		g.setColor(Color.white);
-//		g.setFont(font);
-//		g.drawString(text, clickBox.x + clickBox.width / 2 - DrawUtils.getMessageWidth(text, font, g) / 2,
-//							clickBox.y + clickBox.height / 2 + DrawUtils.getMessageHeight(text, font, g) / 2);
+		g.setFont(font);
+		g.drawString(text, clickBox.x + clickBox.width / 2 - DrawUtils.getMessageWidth(text, font, g) / 2,
+							clickBox.y + clickBox.height / 2 + DrawUtils.getMessageHeight(text, font, g) / 2);
 	}
 	
 	public void addActionListener(ActionListener listener) {

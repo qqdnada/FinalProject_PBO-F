@@ -1,4 +1,4 @@
-package id.ac.its.finalprojectpbo.game;
+package id.ac.its.finalprojectpbo.gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -6,8 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import com.example.DrawUtils;
+import com.example.Game;
+
 import id.ac.its.finalprojectpbo.gui.GuiButton;
-import id.ac.its.finalprojectpbo.gui.GuiPanel;
 import id.ac.its.finalprojectpbo.gui.GuiScreen;
 
 public class MainMenuPanel extends GuiPanel {
@@ -52,7 +54,7 @@ public class MainMenuPanel extends GuiPanel {
 		super.render(g);
 		g.setFont(titleFont);
 		g.setColor(Color.black);
-		g.drawString(title, Game.WIDTH / DrawUtils.getMessageWidth(title, titleFont, g) / 2, 150);
+		g.drawString(title, Game.WIDTH / 2 - DrawUtils.getMessageWidth(title, titleFont, g) / 2, 150);
 	}
 	
 	
