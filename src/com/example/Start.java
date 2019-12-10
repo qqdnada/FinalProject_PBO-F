@@ -11,7 +11,7 @@ public class Start {
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 		window.add(game);
-		window.pack();
+		window.pack(); 
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 		

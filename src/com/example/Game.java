@@ -16,9 +16,11 @@ public class Game extends JPanel implements KeyListener, Runnable {
 	public static final int WIDTH = 400;
 	public static final int HEIGHT = 630;
 	public static final Font main = new Font("Bebas", Font.PLAIN, 28);
+	
 	private Thread game;
 	private boolean running;
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private GameBoard board;
 	
 	private long startTime;
 	private long elapsed;
@@ -28,11 +30,14 @@ public class Game extends JPanel implements KeyListener, Runnable {
 		setFocusable(true);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		addKeyListener(this);
+		
+		board = new GameBoard(WIDTH / 2 - GameBoard.BOARD_WIDTH / 2, HEIGHT - GameBoard.BOARD_HEIGHT - 10);
 	}
 	
 	//akan dipanggil 60x/seconds
 	private void update() {
-		
+    	board.update();
+		Keyboard.update();
 	}
 	
 	//untuk membangun gambaran / model screen nya 
@@ -46,7 +51,8 @@ public class Game extends JPanel implements KeyListener, Runnable {
 		//screen bentuk rectangle 
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
-		//render board nanti
+		//render board
+		board.render(g);
 		
 		//wajib setelah memanggil Graphics / Graphics2D, untuk mengatur
 		g.dispose();
@@ -129,18 +135,17 @@ public class Game extends JPanel implements KeyListener, Runnable {
 	
 	@Override 
 	public void keyPressed(KeyEvent e) {
-		
+		Keyboard.keyPressed(e);
 	}
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+		Keyboard.keyReleased(e);
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 }

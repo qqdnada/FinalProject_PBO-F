@@ -95,7 +95,7 @@ public class Tile {
 			background = new Color(0xffe400);
 			text = new Color(0x000000);
 		}
-		//kalo g ditaruh gambar
+		//kalo g ditaruh angka apa"
 		else {
 			background = Color.black;
 			text = Color.white;
@@ -109,7 +109,7 @@ public class Tile {
 				
 		g.setColor(text);
 				
-		//two digit number
+		//dua digit angka
 		if(value <= 64) {
 			font = Game.main.deriveFont(36f);
 		}
@@ -118,8 +118,10 @@ public class Tile {
 		}
 		g.setFont(font);
 		
-		//setengah dari lebar  
+		//supaya tulisan angkanya berada di tengah tiles  
 		int drawX = WIDTH / 2 - DrawUtils.getMessageWidth("" + value, font, g) /2;
-		int drawY = HEIGHT / 2 + DrawUtils.getMessageHeight("" + value, font, g)
+		int drawY = HEIGHT / 2 + DrawUtils.getMessageHeight("" + value, font, g) /2;
+		g.drawString("" + value, drawX, drawY);
+		g.dispose();
 	} 
 }
