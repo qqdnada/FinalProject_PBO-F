@@ -104,7 +104,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, MouseMot
 			//update queue
 			while (unprocessed >= 1) {
 				updates++;
-//				update();
+				update();
 				unprocessed--;
 				shouldRender = true;
 			}
