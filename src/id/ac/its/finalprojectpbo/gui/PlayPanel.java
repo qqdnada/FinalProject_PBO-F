@@ -15,7 +15,7 @@ public class PlayPanel extends GuiPanel {
 	
 	private GameBoard board;
 	private BufferedImage info;
-//	private ScoreManager score;
+	private ScoreManager score;
 	private Font scoreFont;
 	
 	// Game over
@@ -36,7 +36,7 @@ public class PlayPanel extends GuiPanel {
 		scoreFont = Game.main.deriveFont(24f);
 		gameOverFont = Game.main.deriveFont(70f);
 		board = new GameBoard(Game.WIDTH /2 - GameBoard.BOARD_WIDTH / 2, Game.HEIGHT - GameBoard.BOARD_HEIGHT - 20);
-//		scores = board.getScores();
+//		score = board.getScores();
 		info = new BufferedImage(Game.WIDTH, 200, BufferedImage.TYPE_INT_RGB);
 		
 		mainMenu = new GuiButton(Game.WIDTH / 2 - largeButtonWidth / 2, 450, largeButtonWidth, buttonHeight);
@@ -52,7 +52,7 @@ public class PlayPanel extends GuiPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 //				board.getScores().reset();
-//				board.reset();
+				board.reset();
 				alpha = 0;
 				
 				remove(tryAgain);
@@ -79,8 +79,8 @@ public class PlayPanel extends GuiPanel {
 		g2d.setColor(Color.white);
 		g2d.fillRect(0, 0, info.getWidth(), info.getHeight());
 		g2d.setColor(Color.lightGray);
-		g2d.setFont(scoreFont);
-//		g2d.drawString("" + scores.getCurrentScore(), 30, 40);
+//		g2d.setFont(scoreFont);
+//		g2d.drawString("" + score.getCurrentScore(), 30, 40);
 //		g2d.setColor(Color.red);
 		g2d.dispose();
 		g.drawImage(info, 0, 0, null);
@@ -88,7 +88,7 @@ public class PlayPanel extends GuiPanel {
 	
 	public void drawGameOver(Graphics2D g) {
 		
-		g.setColor(new Color(222, 2222, 222, alpha));
+		g.setColor(new Color(222, 222, 222, alpha));
 		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		g.setColor(Color.red);
 		g.setFont(gameOverFont);
@@ -98,26 +98,26 @@ public class PlayPanel extends GuiPanel {
 	@Override
 	public void update() {
 		board.update();
-/*		if(board.isDead()) {
+		if(board.isDead()) {
 			alpha++;
 			if(alpha > 170) alpha = 170;
 		}
-*/	}
+	}
 	
 	@Override
 	public void render(Graphics2D g) {
 		drawGui(g);
 		board.render(g);
 //		if(screenshot) {}
-/*		if(board.isDead()) {
+		if(board.isDead()) {
 			if(!added) {
 				added = true;
 				add(mainMenu);
 				add(tryAgain);
-				add(screenShot);
+//				add(screenShot);
 			}
 			drawGameOver(g);
 		}
-*/		super.render(g);
+		super.render(g);
 	}
 }

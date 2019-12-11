@@ -43,6 +43,8 @@ public class GameBoard {
 	//bisa dibuka, diubah 
 	private String fileName = "SaveData";
 	
+	private boolean newGame;
+	
 	private static int SPACING = 10;
 	public static int BOARD_WIDTH = (COLS + 1)*SPACING + COLS * Tile.WIDTH;
 	public static int BOARD_HEIGHT = (ROWS + 1)*SPACING + ROWS * Tile.HEIGHT;
@@ -67,7 +69,19 @@ public class GameBoard {
 		loadScore();
 		createBoardImage();
 		start();
-	}
+		
+/*		if(scores.newGame()) {
+			start();
+		}
+		else {
+			for(int i = 0; i < scores.getBoard().length; i++){
+				if(scores.getBoard([i] == 0) continue;
+				spawn(i / ROWS, i % COLS, scores.getBoard)[i];
+			}
+			dead = checkDead();
+			win = checkWin();
+		}
+*/	}
 	
 	// 3 fungsi dibawah buat nyimpen data score kita
 	private void createSaveData() {
@@ -205,6 +219,7 @@ public class GameBoard {
 				
 				if(current.getValue() == 2048) {
 					win = true;
+					// setWin(true);
 				}
 			}
 		}
@@ -380,25 +395,45 @@ public class GameBoard {
 		if(canMove) {
 			spawnRandom();
 			//cek mati apa ga, klo mati tile ny abis
-			checkDead();
+			setDead(checkDead());
 		}
 	}
 	
-	private void checkDead() {
+	public void reset() {
+		board = new Tile[ROWS][COLS];
+		start();
+		dead = false;
+		win = false;
+		hasStarted = false;
+		score = 0;
+	}
+	
+	private boolean checkDead() {
 		for (int row = 0; row < ROWS; row++) {
 			for (int col = 0; col < COLS; col++) {
 				//klo kosong, santuy jd bisa masuk 
-				if(board[row][col] == null) return;
+				if(board[row][col] == null) return false;
 				//klo ga kosong, cek sekitar 
 				if(checkSurroundingTiles(row, col, board[row][col])) {
-					return;
+					return false;
 				}
 			}	
 		}
-		dead = true;
-		
 		//untuk score
 		setScore();
+		
+		return true;
+		
+	}
+	
+	private boolean checkWin() {
+		for (int row = 0; row < ROWS; row++) {
+			for(int col = 0; col < COLS; col++) {
+				if(board[row][col] == null) continue;
+				if(board[row][col].getValue() >= 2048) return true;
+			}
+		}
+		return false;
 	}
 	
 	private boolean checkSurroundingTiles(int row, int col, Tile Current) {
@@ -435,23 +470,74 @@ public class GameBoard {
 			//pindah kiri tilesnya
 			moveTiles(Direction.LEFT);
 			if(!hasStarted) hasStarted = true;
+//			if(!hasStarted) hasStarted = !dead;
 		}
 		if(Keyboard.typed(KeyEvent.VK_RIGHT)) {
 			//pindah kanan tilesnya
 			moveTiles(Direction.RIGHT);
 			if(!hasStarted) hasStarted = true;
+//			if(!hasStarted) hasStarted = !dead;
 		}
 		if(Keyboard.typed(KeyEvent.VK_UP)) {
 			//pindah atas tilesnya
 			moveTiles(Direction.UP);
 			if(!hasStarted) hasStarted = true;
-			
+//			if(!hasStarted) hasStarted = !dead;			
 		}
 		if(Keyboard.typed(KeyEvent.VK_DOWN)) {
 			//pindah bawah tilesnya
 			moveTiles(Direction.DOWN);
 			if(!hasStarted) hasStarted = true;
-			
+//			if(!hasStarted) hasStarted = !dead;			
 		}
 	}
+
+	public int getHighestTileValue() {
+		int value = 2;
+		for(int row = 0; row < ROWS; row++) {
+			for(int col = 0; col < COLS; col++) {
+				if(board[row][col] == null) continue;
+				if(board[row][col].getValue() > value) value = board[row][col].getValue();
+			}
+		}
+		return value;
+	}
+	
+	public boolean isDead() {
+		return dead;
+	}
+	
+	public void setDead(boolean dead) {
+		this.dead = dead;
+	}
+
+	public boolean isWin() {
+		return win;
+	}
+	
+	public void setWin(boolean win) {
+		this.win = win;
+	}
+	
+	public Tile[][] getBoard() {
+		return board;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	
 }

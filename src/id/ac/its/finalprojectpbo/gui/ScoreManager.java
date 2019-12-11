@@ -1,5 +1,7 @@
 package id.ac.its.finalprojectpbo.gui;
 
+import java.io.File;
+
 import id.ac.its.finalprojectpbo.game.GameBoard;
 
 public class ScoreManager {
@@ -19,6 +21,8 @@ public class ScoreManager {
 	}
 	
 	public void reset() {
+		
+		
 		newGame = true;
 		currentScore = 0;
 	}
