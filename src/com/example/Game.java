@@ -1,6 +1,7 @@
 package com.example;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -10,18 +11,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-
 import javax.swing.JPanel;
 
-import id.ac.its.finalprojectpbo.gui.GuiScreen;
-import id.ac.its.finalprojectpbo.gui.MainMenuPanel;
-import id.ac.its.finalprojectpbo.gui.PlayPanel;
 
 public class Game extends JPanel implements KeyListener, MouseListener, MouseMotionListener, Runnable {
 	
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 400;
-	public static final int HEIGHT = 630;
+	public static final int WIDTH = 500;
+	public static final int HEIGHT = 550;
 	public static final Font main = new Font("Arial", Font.PLAIN, 28);
 	
 	private Thread game;
@@ -33,7 +30,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, MouseMot
 	private long elapsed;
 	private boolean set;
 	
-	private GuiScreen screen;
+//	private GuiScreen screen;
 	
 	public Game() {
 		setFocusable(true);
@@ -42,17 +39,17 @@ public class Game extends JPanel implements KeyListener, MouseListener, MouseMot
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
-//		board = new GameBoard(WIDTH / 2 - GameBoard.BOARD_WIDTH / 2, HEIGHT - GameBoard.BOARD_HEIGHT - 10);
-		screen = GuiScreen.getScreen();
-		screen.add("Menu", new MainMenuPanel());
-		screen.add("Play", new PlayPanel());
-		screen.setCurrentPanel("Menu");
+		board = new GameBoard(WIDTH / 2 - GameBoard.BOARD_WIDTH / 2, HEIGHT - GameBoard.BOARD_HEIGHT - 10);
+//		screen = GuiScreen.getScreen();
+//		screen.add("Menu", new MainMenuPanel());
+//		screen.add("Play", new PlayPanel());
+//		screen.setCurrentPanel("Menu");
 	}
 	
 	//akan dipanggil 60x/seconds
 	private void update() {
-//    	board.update();
-		screen.update();
+    	board.update();
+//		screen.update();
 		Keyboard.update();
 	}
 	
@@ -68,9 +65,9 @@ public class Game extends JPanel implements KeyListener, MouseListener, MouseMot
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		//render board
-//		board.render(g);
+		board.render(g);
 		
-		screen.render(g);
+//		screen.render(g);
 		
 		//wajib setelah memanggil Graphics / Graphics2D, untuk mengatur
 		g.dispose();
@@ -107,7 +104,7 @@ public class Game extends JPanel implements KeyListener, MouseListener, MouseMot
 			//update queue
 			while (unprocessed >= 1) {
 				updates++;
-				update();
+//				update();
 				unprocessed--;
 				shouldRender = true;
 			}
@@ -186,25 +183,25 @@ public class Game extends JPanel implements KeyListener, MouseListener, MouseMot
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		screen.mousePressed(e);
+//		screen.mousePressed(e);
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		screen.mouseReleased(e);
+//		screen.mouseReleased(e);
 		
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		screen.mouseDragged(e);
+//		screen.mouseDragged(e);
 		
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		screen.mouseMoved(e);
+//		screen.mouseMoved(e);
 		
 	}
 	
