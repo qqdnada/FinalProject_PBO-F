@@ -17,8 +17,8 @@ import javax.swing.JPanel;
 public class Game extends JPanel implements KeyListener, MouseListener, MouseMotionListener, Runnable {
 	
 	private static final long serialVersionUID = 1L;
-	public static final int WIDTH = 500;
-	public static final int HEIGHT = 550;
+	public static final int WIDTH = 330;
+	public static final int HEIGHT = 450;
 	public static final Font main = new Font("Arial", Font.PLAIN, 28);
 	
 	private Thread game;

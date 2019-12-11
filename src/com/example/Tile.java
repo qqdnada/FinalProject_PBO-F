@@ -85,7 +85,7 @@ public class Tile {
 			background = new Color(0xf79d3d);
 			text = new Color(0xffffff);
 		}
-		//untuk value 
+		//untuk value 16
 		else if (value == 16) {
 			background = new Color(0xf28007);
 			text = new Color(0xffffff);
@@ -166,7 +166,7 @@ public class Tile {
 			g2d.setColor(new Color(0,0,0,0));
 			g2d.fillRect( 0,0, WIDTH, HEIGHT );
 			g2d.drawImage(gambarKotak, transform, null);
-			scaleFirst += 0.1;
+			scaleFirst += 0.09;
 			g2d.dispose();
 			
 			//klo uda ada animasinya, ga perlu lagi nambah

@@ -1,6 +1,7 @@
 package com.example;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -10,8 +11,8 @@ public class GameBoard {
 	
 	//bisa ubah rows cm cols, tp jgn lupa ubha ukuran JPanel di Game
 	
-	public static final int ROWS = 4;
-	public static final int COLS = 4;
+	public static final int ROWS = 3;
+	public static final int COLS = 3;
 	
 	private final int startingTiles = 2;
 	private Tile[][] board;
@@ -24,15 +25,29 @@ public class GameBoard {
 	//background+tiles
 	private BufferedImage finalBoard;
 	
-	//render di screennya
+	//untuk render di screennya
 	private int x;
 	private int y;
+	
+	//untuk score
+	private int score = 0;
+	private int highscore = 0;
+	private Font scoreFont;
+	//untuk menyimpan data path ke foldernya
+	private String saveDataPath;
+	//bisa dibuka, diubah 
+	private String fileName = "SaveData";
 	
 	private static int SPACING = 10;
 	public static int BOARD_WIDTH = (COLS + 1)*SPACING + COLS * Tile.WIDTH;
 	public static int BOARD_HEIGHT = (ROWS + 1)*SPACING + ROWS * Tile.HEIGHT;
 	
 	public GameBoard(int x, int y) {
+		try {
+			saveDataPath = GameBoard.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		this.x = x;
 		this.y = y;
 		board = new Tile[ROWS][COLS];
