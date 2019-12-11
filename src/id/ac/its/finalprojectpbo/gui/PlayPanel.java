@@ -22,10 +22,10 @@ public class PlayPanel extends GuiPanel {
 	private GuiButton tryAgain;
 	private GuiButton mainMenu;
 	private GuiButton screenShot;
-	private int smallButtonWidth = 160;
+	private int smallButtonWidth = 100;
 	private int spacing = 20;
 	private int largeButtonWidth = smallButtonWidth * 2 + spacing;
-	private int buttonHeight = 50;
+	private int buttonHeight = 36;
 	
 	private boolean added;
 	private int alpha;
@@ -33,14 +33,14 @@ public class PlayPanel extends GuiPanel {
 	private boolean screenshot;
 	
 	public PlayPanel() {
-		scoreFont = Game.main.deriveFont(24f);
-		gameOverFont = Game.main.deriveFont(70f);
+//		scoreFont = Game.main.deriveFont(24f);
+		gameOverFont = Game.main.deriveFont(60f);
 		board = new GameBoard(Game.WIDTH /2 - GameBoard.BOARD_WIDTH / 2, Game.HEIGHT - GameBoard.BOARD_HEIGHT - 20);
 //		score = board.getScores();
 		info = new BufferedImage(Game.WIDTH, 200, BufferedImage.TYPE_INT_RGB);
 		
-		mainMenu = new GuiButton(Game.WIDTH / 2 - largeButtonWidth / 2, 450, largeButtonWidth, buttonHeight);
-		tryAgain = new GuiButton(mainMenu.getX(), mainMenu.getY()- spacing - buttonHeight, smallButtonWidth, buttonHeight);
+		mainMenu = new GuiButton(Game.WIDTH / 2 - largeButtonWidth / 2, 300, largeButtonWidth, buttonHeight);
+		tryAgain = new GuiButton(mainMenu.getX(), mainMenu.getY()- spacing - buttonHeight, largeButtonWidth, buttonHeight);
 		screenShot = new GuiButton(tryAgain.getX() + tryAgain.getWidth() + spacing, tryAgain.getY(), smallButtonWidth, buttonHeight);
 		
 		tryAgain.setText("Try Again");
@@ -92,7 +92,7 @@ public class PlayPanel extends GuiPanel {
 		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		g.setColor(Color.red);
 		g.setFont(gameOverFont);
-		g.drawString("Game Over", Game.WIDTH / 2 - DrawUtils.getMessageWidth("Game Over", gameOverFont, g) /2 , 250);
+		g.drawString("Game Over", Game.WIDTH / 2 - DrawUtils.getMessageWidth("Game Over", gameOverFont, g) /2 , 160);
 	}
 	
 	@Override
