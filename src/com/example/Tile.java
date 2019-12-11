@@ -19,9 +19,24 @@ public class Tile {
 	private Color background;
 	private Color text;
 	private Font font;
+	private Point slideTo;
 	private int x;
 	private int y;
+	
+	//waktu kita slide tilesnya, pasti ada tempat akhir nya tile
+	//jadi harus ada variable yg nyimpien selama dia di posisi yg salah( temporary posisition)
+	
+	private boolean canCombine;
 		
+	//setter getter
+	public boolean canCombine() {
+		return canCombine;
+	}
+
+	public void setCanCombine(boolean canCombine) {
+		this.canCombine = canCombine;
+	}
+
 	public Tile (int value, int x, int y) {
 		this.value = value;
 		this.x = x;
@@ -123,5 +138,21 @@ public class Tile {
 		int drawY = HEIGHT / 2 + DrawUtils.getMessageHeight("" + value, font, g) /2;
 		g.drawString("" + value, drawX, drawY);
 		g.dispose();
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void render(Graphics2D g) {
+		g.drawImage(tileImage, x, y, null);
+	}
+
+	public Point getSlideTo() {
+		return slideTo;
+	}
+
+	public void setSlideTo(Point slideTo) {
+		this.slideTo = slideTo;
 	} 
 }
