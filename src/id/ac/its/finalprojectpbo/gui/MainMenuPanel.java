@@ -6,8 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.example.DrawUtils;
-import com.example.Game;
+import id.ac.its.finalprojectpbo.game.DrawUtils;
+import id.ac.its.finalprojectpbo.game.Game;
 
 import id.ac.its.finalprojectpbo.gui.GuiButton;
 import id.ac.its.finalprojectpbo.gui.GuiScreen;

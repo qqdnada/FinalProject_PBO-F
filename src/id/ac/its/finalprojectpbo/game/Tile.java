@@ -1,4 +1,4 @@
-package com.example;
+package id.ac.its.finalprojectpbo.game;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

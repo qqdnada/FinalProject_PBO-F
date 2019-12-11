@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import com.example.DrawUtils;
-import com.example.Game;
+import id.ac.its.finalprojectpbo.game.DrawUtils;
+import id.ac.its.finalprojectpbo.game.Game;
 
 
 

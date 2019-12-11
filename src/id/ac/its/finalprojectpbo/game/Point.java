@@ -1,4 +1,4 @@
-package com.example;
+package id.ac.its.finalprojectpbo.game;
 
 //untuk posisi x dan y 
 public class Point {

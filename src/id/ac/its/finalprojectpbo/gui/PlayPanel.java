@@ -7,9 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-import com.example.DrawUtils;
-import com.example.Game;
-import com.example.GameBoard;
+import id.ac.its.finalprojectpbo.game.DrawUtils;
+import id.ac.its.finalprojectpbo.game.Game;
+import id.ac.its.finalprojectpbo.game.GameBoard;
 
 public class PlayPanel extends GuiPanel {
 	

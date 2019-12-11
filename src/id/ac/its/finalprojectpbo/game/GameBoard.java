@@ -1,10 +1,16 @@
-package com.example;
+package id.ac.its.finalprojectpbo.game;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
 import java.util.Random;
 
 public class GameBoard {
@@ -31,7 +37,6 @@ public class GameBoard {
 	
 	//untuk score
 	private int score = 0;
-	private int highscore = 0;
 	private Font scoreFont;
 	//untuk menyimpan data path ke foldernya
 	private String saveDataPath;
@@ -43,19 +48,67 @@ public class GameBoard {
 	public static int BOARD_HEIGHT = (ROWS + 1)*SPACING + ROWS * Tile.HEIGHT;
 	
 	public GameBoard(int x, int y) {
+		//untuk user yg bakal running jar file (dimana pun) 
 		try {
+//			fungsiny sama aja, dua cara ini
 			saveDataPath = GameBoard.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+//			saveDataPath = System.getProperty("user.home") + "\\foldername";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		scoreFont = Game.main.deriveFont(24f);
 		this.x = x;
 		this.y = y;
 		board = new Tile[ROWS][COLS];
 		gameBoard = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT, BufferedImage.TYPE_INT_RGB);
 		finalBoard = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT, BufferedImage.TYPE_INT_RGB);
 		
+		loadScore();
 		createBoardImage();
 		start();
+	}
+	
+	// 3 fungsi dibawah buat nyimpen data score kita
+	private void createSaveData() {
+		//untuk buat file baru dengan lokasi dari pathnya
+		try {
+			File file = new File (saveDataPath, fileName);
+			FileWriter output = new  FileWriter(file);
+			BufferedWriter writer = new BufferedWriter(output);
+			
+			//"" kosong supaya tau itu string, klo g dikasi jadinya karakter
+			writer.write("" + 0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void loadScore() {
+		try {
+			File f = new File(saveDataPath, fileName);
+			//kalau file yg di input g ada, lgsng ke ke fungsi saveData buat bikin penyimpananny 
+			if(!f.isFile()) createSaveData();
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+			reader.close();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void setScore() {
+		FileWriter output = null;
+		try {
+			File f = new File(saveDataPath, fileName);
+			output = new FileWriter(f);
+			BufferedWriter writer = new BufferedWriter(output);
+			writer.write("" + score);
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	//background dari gameBoard
@@ -72,7 +125,7 @@ public class GameBoard {
 				g.fillRoundRect(x, y, Tile.WIDTH, Tile.HEIGHT, Tile.ARC_WIDTH, Tile.ARC_HEIGHT);
 			}
 		}
-//		g.dispose();
+		g.dispose();
 	}
 	
 	private void start() {
@@ -127,10 +180,18 @@ public class GameBoard {
 		
 		g.drawImage(finalBoard, x, y, null);
 		g2d.dispose();
+		
+		g.setColor(Color.BLACK);
+		g.setFont(scoreFont);
+		g.drawString("Score : " + score, 30, 40);
 	}
 	
 	public void update() {
 		checkKeys();
+		
+//		if(score > highscore) {
+//			highscore = score;
+//		}
 		
 		for ( int row = 0; row < ROWS; row++) {
 			for ( int col = 0; col < COLS; col++) {
@@ -223,6 +284,7 @@ public class GameBoard {
 				board[newRow][newCol].setCombineAnimation(true);
 				
 				//scoring
+				score += board[newRow][newCol].getValue();
 			}
 			else {
 				move = false;
@@ -333,9 +395,10 @@ public class GameBoard {
 				}
 			}	
 		}
-		
 		dead = true;
+		
 		//untuk score
+		setScore();
 	}
 	
 	private boolean checkSurroundingTiles(int row, int col, Tile Current) {

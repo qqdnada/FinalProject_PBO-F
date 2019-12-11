@@ -1,6 +1,6 @@
 package id.ac.its.finalprojectpbo.gui;
 
-import com.example.GameBoard;
+import id.ac.its.finalprojectpbo.game.GameBoard;
 
 public class ScoreManager {
 	
